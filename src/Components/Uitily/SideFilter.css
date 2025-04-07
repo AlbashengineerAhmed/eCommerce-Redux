@@ -1,0 +1,57 @@
+.sidebarr {
+  position: absolute; /* instead of fixed */
+  top: 0;
+  right: -150%;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* When sidebarr is open */
+.sidebarr.open {
+  right: 0;
+}
+
+/* Close (X) button inside sidebarr */
+.sidebarr-close-btn {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* Toggle button (hamburger) */
+.sidebarr-toggle-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 900;
+}
+
+/* Large screen behavior */
+@media (min-width: 992px) {
+  .sidebarr {
+    position: relative;
+    right: auto;
+    width: 250px;
+    height: auto;
+    box-shadow: none;
+    display: block !important;
+  }
+
+  .sidebarr-toggle-btn {
+    display: none;
+  }
+
+  .sidebarr-close-btn {
+    display: none;
+  }
+}
