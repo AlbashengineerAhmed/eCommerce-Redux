@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const baseUrl = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://backend-ecommerce-test.vercel.app",
 });
 
 export default baseUrl
