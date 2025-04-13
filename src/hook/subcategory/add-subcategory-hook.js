@@ -16,7 +16,9 @@ const AddSubcategoryhook = () => {
     }, [])
     const [id, setID] = useState('0')
     const [name, setName] = useState('')
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
     //get last catgeory state from redux
     const category = useSelector(state => state.allCategory.category)
 
@@ -52,6 +54,7 @@ const AddSubcategoryhook = () => {
         }
 
         setLoading(true)
+        setHasSubmitted(true);
         await dispatch(createSubCategory({
             name,
             category: id
@@ -61,22 +64,21 @@ const AddSubcategoryhook = () => {
     }
     useEffect(() => {
 
-        if (loading === false) {
-            setName("")
-            setID("0")
-            if (subcategory)
-                console.log(subcategory)
-            if (subcategory.status === 201) {
-                notify("تمت الاضافة بنجاح", "success")
-            }
-            else if (subcategory === "Error Error: Request failed with status code 400") {
-                notify("هذا الاسم مكرر من فضلك اختر اسم اخر", "warn")
-            }
-            else {
-                notify("هناك مشكله فى عملية الاضافة", "warn")
-            }
+        if (loading === false && hasSubmitted) {
+          setName("");
+          setID("0");
+          if (subcategory) console.log(subcategory);
+          if (subcategory.status === 201) {
+            notify("تمت الاضافة بنجاح", "success");
+          } else if (
+            subcategory === "Error Error: Request failed with status code 400"
+          ) {
+            notify("هذا الاسم مكرر من فضلك اختر اسم اخر", "warn");
+          } else {
+            notify("هناك مشكله فى عملية الاضافة", "warn");
+          }
 
-            setLoading(true)
+          setHasSubmitted(false); 
         }
     }, [loading])
 

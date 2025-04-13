@@ -7,6 +7,7 @@ import CategoryCard from './../../Category/CategoryCard';
 const HomeCategory = () => {
 
     const [category, loading, colors] = HomeCategoryHook();
+console.log(category);
 
     return (
         <Container>
@@ -15,7 +16,7 @@ const HomeCategory = () => {
                 {
                     loading === false ? (
                         category ? (
-                            category.data.slice(0, 5).map((item, index) => {
+                            category.data.slice(1, 6).map((item, index) => {
                                 return (<CategoryCard key={index} id={item._id} title={item.name} img={item.image} background={colors[index]} />)
                             })
                         ) : <h4>لا يوجد تصنيفات</h4>

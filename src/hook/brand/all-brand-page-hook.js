@@ -12,7 +12,8 @@ const AllBrandHook = () => {
     //to get state from redux
     const brand = useSelector(state => state.allBrand.brand)
     const loading = useSelector(state => state.allBrand.loading)
-
+    console.log(brand);
+    
 
     //to get page count
     let pageCount = 0;
