@@ -19,14 +19,14 @@ const ProductCard = ({ item, favProd }) => {
                 className="my-2"
                 style={{
                     width: "100%",
-                    height: "345px",
+                    height: "470px",
                     borderRadius: "8px",
                     border: "none",
                     backgroundColor: "#FFFFFF",
                     boxShadow: "0 2px 2px 0 rgba(151,151,151,0.5)",
                 }}>
                 <Link to={`/products/${item._id}`} style={{ textDecoration: 'none' }}>
-                    <Card.Img style={{ height: "228px", width: "100%" }} src={item.imageCover} />
+                    <Card.Img style={{ height: "350px", width: "100%" }} src={item.imageCover} />
                 </Link>
                 <div className="d-flex justify-content-end mx-2">
                     <img

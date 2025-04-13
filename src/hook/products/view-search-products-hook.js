@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsSearch } from '../../redux/actions/productsAction';
 
 const ViewSearchProductsHook = () => {
-    let limit = 8;
+    let limit = 9;
     const dispatch = useDispatch();
 
     const getProduct = async () => {

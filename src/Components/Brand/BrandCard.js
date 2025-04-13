@@ -9,22 +9,27 @@ const BrandCard = ({ img, id }) => {
       sm="6"
       md="4"
       lg="2"
-      className="my-2 d-flex justify-content-center">
+      className="my-2 d-flex justify-content-center"
+    >
       <Card
         className="my-1"
         style={{
-          width: "100%",
-          height: "151px",
+          width: "170px",
+          height: "170px",
           borderRadius: "8px",
           border: "none",
           backgroundColor: "#FFFFFF",
-        }}>
-        <Link to={`/products/brand/${id}`} style={{ textDecoration: 'none' }}>
-          <Card.Img style={{ width: "100%", height: "151px" }} src={img} />
+        }}
+      >
+        <Link to={`/products/brand/${id}`} style={{ textDecoration: "none" }}>
+          <Card.Img
+            style={{ width: "100%", height: "170px", borderRadius: "50%" }}
+            src={img}
+          />
         </Link>
       </Card>
     </Col>
-  )
+  );
 }
 
 export default BrandCard

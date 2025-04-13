@@ -207,10 +207,10 @@ const AdminEditProductsHook = (id) => {
             itemImages.map((item) => formData.append("images", item))
         }, 1000);
 
-        setTimeout(() => {
-            console.log(imgCover)
-            console.log(itemImages)
-        }, 1000);
+        // setTimeout(() => {
+        //     console.log(imgCover)
+        //     console.log(itemImages)
+        // }, 1000);
 
         colors.map((color) => formData.append("availableColors", color))
         seletedSubID.map((item) => formData.append("subcategory", item._id))
@@ -224,7 +224,7 @@ const AdminEditProductsHook = (id) => {
 
     //get create meesage
     const product = useSelector(state => state.allproducts.updateProducts)
-
+    
     useEffect(() => {
 
         if (loading === false) {
@@ -241,6 +241,8 @@ const AdminEditProductsHook = (id) => {
             setTimeout(() => setLoading(true), 1500)
 
             if (product) {
+                console.log(product);
+                
                 if (product.status === 200) {
                     notify("تم التعديل بنجاح", "success")
                 } else {

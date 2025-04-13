@@ -38,23 +38,28 @@ import Loading from "./Components/Uitily/Loading";
 
 function App() {
   const [isUser, isAdmin, userData] = ProtectedRouteHook();
-  const [loading, setLoading] = useState(true); // State for tracking loading status
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    // Simulate loading for demonstration (replace with real data fetching)
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // Adjust time for actual loading time or API calls
+    }, 2000);
+
+    // Cleanup the timer on component unmount
+    return () => clearTimeout(timer);
   }, []);
+
+  if (loading) {
+    return <Loading />; // Display the loading screen during the initial load
+  }
 
   return (
     <div className="font">
       {loading ? (
-        <Loading/>
+        <Loading />
       ) : (
         <>
-          <NavBar />
           <BrowserRouter>
+            <NavBar />
             <Routes>
               <Route index element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
