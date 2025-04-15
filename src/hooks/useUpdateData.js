@@ -1,21 +1,48 @@
-import baseUrl from '../Api/baseURL'
-
+import baseUrl from "../Api/baseURL";
 
 const useInUpdateDataWithImage = async (url, parmas) => {
-    const config = {
-        headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${localStorage.getItem("token")}` }
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No authentication token found");
     }
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const res = await baseUrl.put(url, parmas, config);
-    console.log(res.status)
     return res;
-}
+  } catch (error) {
+    console.error("Error in useInUpdateDataWithImage:", error);
+    if (error.response) {
+      throw error.response;
+    }
+    throw error;
+  }
+};
 
 const useInsUpdateData = async (url, parmas) => {
-    const config = {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No authentication token found");
     }
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
     const res = await baseUrl.put(url, parmas, config);
     return res;
-}
+  } catch (error) {
+    console.error("Error in useInsUpdateData:", error);
+    if (error.response) {
+      throw error.response;
+    }
+    throw error;
+  }
+};
 
 export { useInUpdateDataWithImage, useInsUpdateData };

@@ -1,19 +1,23 @@
-import React from 'react'
-import { Col, Row } from 'react-bootstrap';
+import React from "react";
+import { Col, Row } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
-import AddRateHook from '../../hook/review/add-rate-hook';
-import { ToastContainer } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import AddRateHook from "../../hook/review/add-rate-hook";
+import { ToastContainer } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const RatePost = () => {
-  const {id} =useParams() ;
-  const [OnChangeRateText, OnChangeRateValue, rateText, rateValue, user, onSubmit] = AddRateHook(id)
+  const { id } = useParams();
+  const [
+    OnChangeRateText,
+    OnChangeRateValue,
+    rateText,
+    rateValue,
+    user,
+    onSubmit,
+  ] = AddRateHook(id);
 
- 
-
-  var name = ""
-  if (user)
-    name = user.name
+  var name = "";
+  if (user) name = user.name;
 
   const setting = {
     size: 20,
@@ -26,9 +30,9 @@ const RatePost = () => {
     emptyIcon: <i className="far fa-star" />,
     halfIcon: <i className="fa fa-star-half-alt" />,
     filledIcon: <i className="fa fa-star" />,
-    onChange: newValue => {
+    onChange: (newValue) => {
       OnChangeRateValue(newValue);
-    }
+    },
   };
   return (
     <div>
@@ -49,14 +53,18 @@ const RatePost = () => {
             placeholder="اكتب تعليقك...."
           />
           <div className=" d-flex justify-content-end al">
-            <div onClick={onSubmit} className="product-cart-add px-3  py-2 text-center d-inline">اضف تعليق</div>
+            <div
+              onClick={onSubmit}
+              className="product-cart-add px-3  py-2 text-center d-inline"
+            >
+              اضف تعليق
+            </div>
           </div>
         </Col>
       </Row>
       <ToastContainer />
-
     </div>
-  )
-}
+  );
+};
 
-export default RatePost
+export default RatePost;

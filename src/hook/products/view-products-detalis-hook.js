@@ -1,69 +1,62 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneProduct, getProductLike, getProductYouLike } from '../../redux/actions/productsAction';
-import mobile from '../../images/mobile.png'
-import { getOneCategory } from '../../redux/actions/categoryAction';
-import { getOneBrand } from '../../redux/actions/brandAction';
+import {
+  getOneProduct,
+  getProductLike,
+} from "../../redux/actions/productsAction";
+import mobile from "../../images/mobile.png";
+import { getOneCategory } from "../../redux/actions/categoryAction";
+import { getOneBrand } from "../../redux/actions/brandAction";
+
 const ViewProductsDetalisHook = (prodID) => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getOneProduct(prodID))
-    }, [])
+  // Memoize selectors to prevent unnecessary re-renders
+  const oneProducts = useSelector((state) => state.allproducts.oneProduct);
+  const oneCategory = useSelector((state) => state.allCategory.oneCategory);
+  const oneBrand = useSelector((state) => state.allBrand.oneBrand);
+  const productLike = useSelector((state) => state.allproducts.productLike);
 
-    const oneProducts = useSelector((state) => state.allproducts.oneProduct)
-    // console.log(oneProducts);
-    
-    const oneCategory = useSelector((state) => state.allCategory.oneCategory)
-    const oneBrand = useSelector((state) => state.allBrand.oneBrand)
-    const productLike = useSelector((state) => state.allproducts.productLike)
-    //to show products item
-    let item = [];
-    if (oneProducts?.data)
-        item = oneProducts.data;
-    else
-        item = []
-
-    useEffect(() => {
-        if (item.category)
-            dispatch(getOneCategory(item.category))
-        if (item.brand)
-            dispatch(getOneBrand(item.brand))
-        if (item.category)
-            dispatch(getProductLike(item.category))
-
-    }, [item])
-
-
-    //to view images gallery
-    let images = []
-    if (item.images)
-        images = item.images.map((img) => { return { original: img } })
-    else {
-        images = [{ original: `${mobile}` }]
+  // Fetch product details when ID changes
+  useEffect(() => {
+    if (prodID) {
+      dispatch(getOneProduct(prodID));
     }
+  }, [prodID, dispatch]);
 
+  // Memoize product data to prevent unnecessary recalculations
+  const item = useMemo(() => {
+    return oneProducts?.data || [];
+  }, [oneProducts]);
 
-    //to show category item
-    let cat = [];
-    if (oneCategory.data)
-        cat = oneCategory.data;
-    else
-        cat = []
+  // Fetch category and brand data when product data is available
+  useEffect(() => {
+    if (item.category) {
+      // Fetch category and related products in parallel
+      Promise.all([
+        dispatch(getOneCategory(item.category)),
+        dispatch(getProductLike(item.category)),
+      ]);
+    }
+    if (item.brand) {
+      dispatch(getOneBrand(item.brand));
+    }
+  }, [item.category, item.brand, dispatch]);
 
-    //to show brand item
-    let brand = [];
-    if (oneBrand.data)
-        brand = oneBrand.data;
-    else
-        brand = []
+  // Memoize image gallery data
+  const images = useMemo(() => {
+    if (item.images) {
+      return item.images.map((img) => ({ original: img }));
+    }
+    return [{ original: mobile }];
+  }, [item.images]);
 
-    let prod = []
-    if (productLike)
-        prod = productLike.data;
-    else
-        prod = []
-    return [item, images, cat, brand, prod]
-}
+  // Memoize category and brand data
+  const cat = useMemo(() => oneCategory.data || [], [oneCategory.data]);
+  const brand = useMemo(() => oneBrand.data || [], [oneBrand.data]);
+  const prod = useMemo(() => productLike?.data || [], [productLike?.data]);
 
-export default ViewProductsDetalisHook
+  return [item, images, cat, brand, prod];
+};
+
+export default ViewProductsDetalisHook;
