@@ -11,7 +11,7 @@ const ProductGallery = () => {
   const [item, images, cat, brand] = ViewProductsDetalisHook(id);
 
   return (
-    <div className="product-gallary-card d-flex justfiy-content-center align-items-center pt-2">
+    <div className="product-gallary-card w-100 d-flex justfiy-content-center align-items-center pt-2">
       <ImageGallery
         items={images}
         showFullscreenButton={false}
