@@ -90,7 +90,7 @@ const RateItem = ({ review }) => {
       </Modal>
 
       <Row className="mt-3">
-        <Col className="d-felx me-5">
+        <Col className="d-flex">
           <div className="rate-name d-inline ms-2">{review.user.name}</div>
           <img className="" src={rate} alt="" height="16px" width="16px" />
           <div className="cat-rate d-inline p-1 pt-2">{review.rating}</div>

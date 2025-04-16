@@ -6,8 +6,8 @@ import twitter from "../../images/twitter.png";
 import phone from "../../images/phone.png";
 const Footer = () => {
     return (
-        <div className="footer-background footer mt-3 pt-2" style={{ maxHeight: "50px" }}>
-            <Container className="">
+        <div className="footer-background footer mt-3 pt-2">
+            <Container>
                 <Row className="d-flex justify-content-between align-items-center">
                     <Col sm="6" className="d-flex align-items-center ">
                         <div className="footer-shroot ">الشروط والاحكام</div>

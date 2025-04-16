@@ -7,7 +7,7 @@ const ProductDetalis = () => {
    
     return (
         <div>
-            <Row className='py-3'>
+            <Row className='py-3 overflow-hidden'>
                 <Col lg="4">
                     <ProductGallery  />
                 </Col>
