@@ -1,51 +1,53 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AdminSideBar = () => {
-    return (
-        <div className="sidebar">
-            <div className="d-flex flex-column">
-                <Link to="/admin/allorders" style={{ textDecoration: 'none' }}>
-                    <div className="admin-side-text mt-3 border-bottom p-2 mx-auto text-center">
-                        اداره الطلبات
-                    </div>
-                </Link>
-                <Link to="/admin/allproducts" style={{ textDecoration: 'none' }}>
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        اداره المنتجات
-                    </div>
-                </Link>
-                <Link to="/admin/addbrand" style={{ textDecoration: 'none' }}>
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        اضف ماركه
-                    </div>
-                </Link>
+  const [isOpen, setIsOpen] = useState(false);
 
-                <Link to="/admin/addcategory" style={{ textDecoration: 'none' }}>
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        اضف تصنيف
-                    </div>
-                </Link>
+  const toggleSidebar = () => setIsOpen(!isOpen);
 
-                <Link to="/admin/addsubcategory" style={{ textDecoration: 'none' }}>
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        اضف تصنيف فرعي
-                    </div>
-                </Link>
-                <Link to="/admin/addproduct" style={{ textDecoration: 'none' }}>
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        اضف منتج
-                    </div>
-                </Link>
-                <Link to="/admin/addcoupon" style={{ textDecoration: 'none' }}>
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        اضف كوبون
-                    </div>
-                </Link>
+  return (
+    <>
+      {/* Toggle Open Button (outside) */}
+      {!isOpen && (
+        <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
+          ☰
+        </button>
+      )}
 
-            </div>
+      {/* Sidebar */}
+      <div className={`admin-sidebar ${isOpen ? "open" : ""}`}>
+        <div className="sidebar-content">
+          {/* Close Button (inside sidebar) */}
+          <button className="sidebar-close-btn" onClick={toggleSidebar}>
+            ✕
+          </button>
+
+          <Link to="/admin/allorders" onClick={toggleSidebar}>
+            <div className="admin-side-text">اداره الطلبات</div>
+          </Link>
+          <Link to="/admin/allproducts" onClick={toggleSidebar}>
+            <div className="admin-side-text">اداره المنتجات</div>
+          </Link>
+          <Link to="/admin/addbrand" onClick={toggleSidebar}>
+            <div className="admin-side-text">اضف ماركه</div>
+          </Link>
+          <Link to="/admin/addcategory" onClick={toggleSidebar}>
+            <div className="admin-side-text">اضف تصنيف</div>
+          </Link>
+          <Link to="/admin/addsubcategory" onClick={toggleSidebar}>
+            <div className="admin-side-text">اضف تصنيف فرعي</div>
+          </Link>
+          <Link to="/admin/addproduct" onClick={toggleSidebar}>
+            <div className="admin-side-text">اضف منتج</div>
+          </Link>
+          <Link to="/admin/addcoupon" onClick={toggleSidebar}>
+            <div className="admin-side-text">اضف كوبون</div>
+          </Link>
         </div>
-    )
-}
+      </div>
+    </>
+  );
+};
 
-export default AdminSideBar
+export default AdminSideBar;

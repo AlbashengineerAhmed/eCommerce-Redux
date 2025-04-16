@@ -71,14 +71,8 @@ function App() {
             path="/user/forget-password"
             element={<ForgetPasswordPage />}
           />
-          <Route
-            path="/user/verify-code"
-            element={<VerifyPasswordPage />}
-          />
-          <Route
-            path="/user/reset-password"
-            element={<RsetPasswordPage />}
-          />
+          <Route path="/user/verify-code" element={<VerifyPasswordPage />} />
+          <Route path="/user/reset-password" element={<RsetPasswordPage />} />
           <Route
             path="/products/category/:id"
             element={<ProductsByCategory />}
@@ -86,10 +80,7 @@ function App() {
           <Route path="/products/brand/:id" element={<ProductsByBrand />} />
 
           <Route element={<ProtectedRoute auth={isAdmin} />}>
-            <Route
-              path="/admin/allorders"
-              element={<AdminAllOrdersPage />}
-            />
+            <Route path="/admin/allorders" element={<AdminAllOrdersPage />} />
             <Route
               path="/admin/allproducts"
               element={<AdminAllProductsPage />}
@@ -111,10 +102,7 @@ function App() {
               path="/admin/addproduct"
               element={<AdminAddProductsPage />}
             />
-            <Route
-              path="/admin/addcoupon"
-              element={<AdminAddCouponPage />}
-            />
+            <Route path="/admin/addcoupon" element={<AdminAddCouponPage />} />
             <Route
               path="/admin/editcoupon/:id"
               element={<AdminEditCouponPage />}
@@ -136,10 +124,7 @@ function App() {
               element={<UserFavoriteProductsPage />}
             />
             <Route path="/user/addresses" element={<UserAllAddresPage />} />
-            <Route
-              path="/user/add-address"
-              element={<UserAddAddressPage />}
-            />
+            <Route path="/user/add-address" element={<UserAddAddressPage />} />
             <Route
               path="/user/edit-address/:id"
               element={<UserEditAddressPage />}
