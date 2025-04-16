@@ -18,45 +18,49 @@ const DeleteCartHook = (item) => {
     await dispatch(clearAllCartItem());
     setLoading(false);
   };
+
   const onChangeCount = (e) => {
     setItemCount(e.target.value);
   };
+
   useEffect(() => {
     if (item) setItemCount(item.count);
-  }, []);
+  }, [item]);
+
   const res = useSelector((state) => state.cartReducer.clearCart);
+
   useEffect(() => {
     if (loading === false) {
       if (res === "") {
         notify("تم الحذف بنجاح", "success");
-        setTimeout(() => {
-          window.location.reload(false);
-        }, 1000);
-      } else {
+        dispatch({ type: "CART_CHANGE" });
       }
     }
-  }, [loading]);
+  }, [loading, res, dispatch]);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  //const dispatch = useDispatch();
-
   const handelDeleteItem = async () => {
+    setLoading(true);
     await dispatch(deleteCartItem(item._id));
+    setLoading(false);
     setShow(false);
-    window.location.reload(false);
+    notify("تم حذف المنتج بنجاح", "success");
+    dispatch({ type: "CART_CHANGE" });
   };
 
   const handeleUpdateCart = async () => {
+    setLoading(true);
     await dispatch(
       updateCartItem(item._id, {
         count: itemCount,
       })
     );
-
-    window.location.reload(false);
+    setLoading(false);
+    notify("تم تحديث الكمية بنجاح", "success");
+    dispatch({ type: "CART_CHANGE" });
   };
 
   return [

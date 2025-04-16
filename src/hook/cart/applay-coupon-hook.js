@@ -22,11 +22,15 @@ const ApplayCouponHook = (cartItems) => {
       return;
     }
     setLoading(true);
-    await dispatch(
-      applayCoupnCart({
-        couponName: couponName,
-      })
-    );
+    try {
+      await dispatch(
+        applayCoupnCart({
+          couponName: couponName,
+        })
+      );
+    } catch (error) {
+      notify("حدث خطأ أثناء تطبيق الكوبون", "error");
+    }
     setLoading(false);
   };
 
@@ -35,8 +39,11 @@ const ApplayCouponHook = (cartItems) => {
       if (res && res.status === 200) {
         notify("تم تطبيق الكوبون بنجاح", "success");
         dispatch({ type: "UPDATE_CART", payload: res.data });
-      } else {
+        dispatch({ type: "CART_CHANGE" });
+      } else if (res && res.status === 400) {
         notify("هذا الكوبون غير صحيح او منتهى الصلاحيه", "warn");
+      } else {
+        notify("حدث خطأ أثناء تطبيق الكوبون", "error");
       }
     }
   }, [loading, res, dispatch]);

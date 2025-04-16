@@ -24,7 +24,7 @@ const ChoosePayMethoud = () => {
                             value="الدفع عن طريق الفيزا"
                             className="mt-2"
                         />
-                        <label style={{ cursor: 'pointer' }} className="mx-2" for="group1">
+                        <label style={{ cursor: 'pointer' }} className="mx-2" htmlFor="group1">
                             الدفع عن طريق البطاقه الائتمانية
                         </label>
                     </Col>
@@ -39,7 +39,7 @@ const ChoosePayMethoud = () => {
                             value="الدفع عند الاستلام"
                             className="mt-2"
                         />
-                        <label style={{ cursor: 'pointer' }} className="mx-2" for="group2">
+                        <label style={{ cursor: 'pointer' }} className="mx-2" htmlFor="group2">
                             الدفع عند الاستلام
                         </label>
                     </Col>

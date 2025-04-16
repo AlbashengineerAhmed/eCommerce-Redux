@@ -18,27 +18,43 @@ const GetAllUserCartHook = () => {
 
   // Get cart data on mount and when cart changes
   useEffect(() => {
+    let isMounted = true;
+
     const get = async () => {
-      setLoading(true);
-      await dispatch(getAllUserCartItems());
-      setLoading(false);
+      if (isMounted) {
+        setLoading(true);
+        try {
+          await dispatch(getAllUserCartItems());
+        } catch (error) {
+          console.error("Error fetching cart items:", error);
+        } finally {
+          if (isMounted) {
+            setLoading(false);
+          }
+        }
+      }
     };
+
     get();
-  }, [cartChange]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [cartChange, dispatch]);
 
   useEffect(() => {
     if (loading === false) {
       if (res && res.status === "success") {
         setItemsNum(res.numOfCartItems);
-        setCartItems(res.data.products);
-        setTotalCartPrice(res.data.totalCartPrice);
-        setCartID(res.data._id);
-        if (res.data.coupon) {
+        setCartItems(res.data?.products || []);
+        setTotalCartPrice(res.data?.totalCartPrice || 0);
+        setCartID(res.data?._id || "0");
+        if (res.data?.coupon) {
           setCouponName(res.data.coupon);
         } else {
           setCouponName("");
         }
-        if (res.data.totalAfterDiscount) {
+        if (res.data?.totalAfterDiscount) {
           setTotalCartPriceAfterDiscount(res.data.totalAfterDiscount);
         } else {
           setTotalCartPriceAfterDiscount("");
