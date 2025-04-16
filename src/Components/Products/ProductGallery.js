@@ -16,12 +16,11 @@ const ProductGallery = () => {
         items={images}
         showFullscreenButton={false}
         showPlayButton={false}
-        isRTL={true}
         showThumbnails={false}
         autoPlay={true}
         slideInterval={3000}
-        renderRightNav={RightButton}
-        renderLeftNav={LeftButton}
+        // renderRightNav={RightButton}
+        // renderLeftNav={LeftButton}
       />
     </div>
   );

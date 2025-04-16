@@ -8,7 +8,7 @@ const AdminAllOrders = () => {
     const [userName, results, paginate, orderData, onPress] = UserGetAllOrderHook()
 
     return (
-      <div className='style'>
+      <div>
         <div className="admin-content-text">ادارة جميع الطلبات</div>
         <Row className="justify-content-start">
           {orderData.length >= 1 ? (

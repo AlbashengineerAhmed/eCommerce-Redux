@@ -139,6 +139,12 @@ body {
   line-height: 53px;
   text-align: center;
 }
+.image-gallery-svg {
+    height: 60px !important;
+}
+.image-gallery {
+    width: 100%;
+}
 .allCard {
   position: relative;
   height: 130px;
@@ -280,7 +286,7 @@ body {
     transform: translateX(-4px);
   }
 .sidebar-close-btn {
-  display: block;
+  display: inline-block;
   background-color: transparent;
   border: none;
   font-size: 22px;
@@ -290,10 +296,6 @@ body {
   margin-bottom: 16px;
 }
   .sidebar-toggle-btn {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    z-index: 1100;
     background-color: #333;
     color: #fff;
     border: none;
@@ -317,9 +319,7 @@ body {
     padding: 6px 10px;
     font-size: 14px;
   }
-  .style{
-    margin-right: 50px;
-  }
+
 }
 
 
